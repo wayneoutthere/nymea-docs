@@ -64,18 +64,19 @@ For each of the repositories the following architectures are provided:
 * armhf
 * arm64
 
+
 To enable the repository, create a file named `/etc/apt/sources.list.d/nymea.list` with the following content:
 
-> Note: Replace `<distro>` with the codename of the distro, e.g. `buster` for Debian 10 or `focal` for Ubuntu 20.04
+> Note: Replace `<distro>` with the codename of the distro, e.g. `buster` for Debian 10 or `jammy` for Ubuntu 22.04
 
 ```bash
-deb http://repository.nymea.io <distro> main
+deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/nymea.gpg] http://repository.nymea.io <distro> main
 ```
 
 Add the repository signing key by running:
 
 ```bash
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key A1A19ED6
+sudo gpg --homedir /tmp --no-default-keyring --keyring /etc/apt/trusted.gpg.d/nymea.gpg --keyserver keyserver.ubuntu.com --recv-keys A1A19ED6
 ```
 
 Once done so, nymea:app can be installed using apt-get:
