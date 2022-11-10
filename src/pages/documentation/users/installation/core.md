@@ -33,16 +33,18 @@ will automatically start upon boot. Please proceed with the [usage guide](/docum
 
 If the nymea Raspberry Pi image is not used, nymea:core can also be installed on an existing Raspberry Pi running Raspbian.
 
-Create a file named `/etc/apt/sources.list.d/nymea.list` with this content:
+To enable the repository, create a file named `/etc/apt/sources.list.d/nymea.list` with the following content:
+
+> Note: Replace `<distro>` with the codename of the distro, e.g. `buster` for Debian 10 or `bullseye` for Debian 11
 
 ```bash
-deb http://repository.nymea.io buster rpi
+deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/nymea.gpg] http://repository.nymea.io <distro> rpi
 ```
 
-Add the repository signing key by running
+Add the repository signing key by running:
 
 ```bash
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key A1A19ED6
+sudo gpg --homedir /tmp --no-default-keyring --keyring /etc/apt/trusted.gpg.d/nymea.gpg --keyserver keyserver.ubuntu.com --recv-keys A1A19ED6
 ```
 
 Once done so, nymea:core can be installed using apt-get:
@@ -84,16 +86,16 @@ For each of the repositories four architectures are provided:
 
 To enable the repository, create a file named `/etc/apt/sources.list.d/nymea.list` with the following content:
 
-> Note: Replace `<distro>` with the codename of the distro, e.g. `buster` for Debian 10 or `focal` for Ubuntu 20.04
+> Note: Replace `<distro>` with the codename of the distro, e.g. `buster` for Debian 10 or `jammy` for Ubuntu 22.04
 
 ```bash
-deb http://repository.nymea.io <distro> main
+deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/nymea.gpg] http://repository.nymea.io <distro> main
 ```
 
 Add the repository signing key by running:
 
 ```bash
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key A1A19ED6
+sudo gpg --homedir /tmp --no-default-keyring --keyring /etc/apt/trusted.gpg.d/nymea.gpg --keyserver keyserver.ubuntu.com --recv-keys A1A19ED6
 ```
 
 Once done so, nymea:core can be installed using apt-get:
